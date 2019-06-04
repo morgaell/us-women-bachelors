@@ -10,7 +10,7 @@ setwd("..")
 
 df <- read.csv("data/percent-bachelors-degrees-women-usa.csv")
 
- shinyServer(function(input, output) {
+ shinySearver(function(input, output) {
    
    output$pie1 <- renderPlot({
      df <- df %>%
