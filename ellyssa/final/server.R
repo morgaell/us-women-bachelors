@@ -8,6 +8,23 @@ data <- as.data.frame(data)
 
 shinyServer(function(input, output) {
   
+  output$intro <- renderText ({
+    introduction <- "The data shown in this application was released by
+      the Department of Education Statistic and accessed by our team via kaggle.com, 
+      an online community for sharing and exploring data sets. The data that was used 
+      contains the percentage of bachelor's degrees earned by women in the United States
+      from 1970-2011. The data is broken up into 17 individual degree programs. 
+    
+      Our target audience includes young women in American who want to pursue a 
+      bachelors degree. From this application, young women can find useful information and
+      resources about women's history and degree trends. This application allows the user
+      to show different aspects of the data to advance their search. The user has the ability
+      to research certain majors, years, and analyze data about STEM majors specifically and
+      and to observe changes over time."
+    
+    return(introduction)
+  })
+  
   ## Bar plot for a given individual major 
   output$major_plot <- renderPlot ({
     # select data from the user input (major)

@@ -1,5 +1,6 @@
 library(shiny)
 library(dplyr)
+library(shinythemes)
 
 majors <- data %>% 
   select(-Year)
@@ -8,9 +9,15 @@ major_names <- colnames(majors)
 selected_year <- unique(data$Year)
 
 # Define UI for application that draws a histogram
-shinyUI(fluidPage(
+shinyUI(fluidPage(theme = shinytheme("darkly"),
   
   navbarPage("US Women's Bachelors Degrees",
+    tabPanel("Introduction",
+       mainPanel(
+         img(src='grads.png', align = "middle"), 
+         textOutput("intro")
+       )
+    ),
     tabPanel("Data By Degree",
       sidebarLayout(
         sidebarPanel(
