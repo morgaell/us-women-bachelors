@@ -45,13 +45,13 @@ shinyServer(function(input, output) {
       filter(Year == input$Year1)
     
     colnms=c("Biology", "Computer.Science", "Engineering", "Math.and.Statistics", "Physical.Sciences")
-    data$new_col<-rowSums(data[,colnms])
+    data$stem<-rowSums(data[,colnms])
     colnm=c("Agriculture", "Architecture", "Art.and.Performance", "Business",
             "Communications.and.Journalism", "Education", "English", "Foreign.Languages",
             "Health.Professions", "Psychology", "Public.Administration", "Social.Sciences.and.History")
-    data$col<-rowSums(data[,colnm])
+    data$non_stem<-rowSums(data[,colnm])
     data <- data %>%
-      select(new_col, col)
+      select(stem, non_stem)
     
     newdf <-  as.data.frame(t(data))
     newdf <- data.frame(major = rownames(newdf), number = newdf, row.names = NULL)
@@ -74,16 +74,16 @@ shinyServer(function(input, output) {
     
     colnms=c("Biology", "Computer.Science", "Engineering", "Math.and.Statistics", "Physical.Sciences")
     
-    data$new_col<-rowSums(data[,colnms])
+    data$stem<-rowSums(data[,colnms])
     
     colnm=c("Agriculture", "Architecture", "Art.and.Performance", "Business",
             "Communications.and.Journalism", "Education", "English", "Foreign.Languages",
             "Health.Professions", "Psychology", "Public.Administration", "Social.Sciences.and.History")
     
-    data$col<-rowSums(data[,colnm])
+    data$non_stem<-rowSums(data[,colnm])
     
     data <- data %>%
-      select(new_col, col)
+      select(stem, non_stem)
     
     newdf <-  as.data.frame(t(data))
     
