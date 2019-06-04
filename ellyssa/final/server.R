@@ -7,7 +7,8 @@ data <- read.csv("data/percent-bachelors-degrees-women-usa.csv")
 data <- as.data.frame(data)
 
 shinyServer(function(input, output) {
-   
+  
+  ## Bar plot for individual majors, given a year  
   output$major_plot <- renderPlot ({
     selected_major <- data[[input$majors]]
     
@@ -139,7 +140,7 @@ shinyServer(function(input, output) {
     #make a bar graph
     graph <-ggplot(dfnew, aes(x = Year, y = V1, fill = major)) +
       geom_bar(stat = "identity") +
-      ylab("number of people") + 
+      ylab("Percentage of Degrees") + 
       theme_bw()
     
     return(graph)
