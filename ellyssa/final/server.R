@@ -7,7 +7,8 @@ data <- read.csv("data/percent-bachelors-degrees-women-usa.csv")
 data <- as.data.frame(data)
 
 shinyServer(function(input, output) {
-   
+  
+  ## Bar plot for individual majors, given a year  
   output$major_plot <- renderPlot ({
     selected_major <- data[[input$majors]]
     
@@ -45,13 +46,13 @@ shinyServer(function(input, output) {
       filter(Year == input$Year1)
     
     colnms=c("Biology", "Computer.Science", "Engineering", "Math.and.Statistics", "Physical.Sciences")
-    data$new_col<-rowSums(data[,colnms])
+    data$stem<-rowSums(data[,colnms])
     colnm=c("Agriculture", "Architecture", "Art.and.Performance", "Business",
             "Communications.and.Journalism", "Education", "English", "Foreign.Languages",
             "Health.Professions", "Psychology", "Public.Administration", "Social.Sciences.and.History")
-    data$col<-rowSums(data[,colnm])
+    data$non_stem<-rowSums(data[,colnm])
     data <- data %>%
-      select(new_col, col)
+      select(stem, non_stem)
     
     newdf <-  as.data.frame(t(data))
     newdf <- data.frame(major = rownames(newdf), number = newdf, row.names = NULL)
@@ -74,16 +75,16 @@ shinyServer(function(input, output) {
     
     colnms=c("Biology", "Computer.Science", "Engineering", "Math.and.Statistics", "Physical.Sciences")
     
-    data$new_col<-rowSums(data[,colnms])
+    data$stem<-rowSums(data[,colnms])
     
     colnm=c("Agriculture", "Architecture", "Art.and.Performance", "Business",
             "Communications.and.Journalism", "Education", "English", "Foreign.Languages",
             "Health.Professions", "Psychology", "Public.Administration", "Social.Sciences.and.History")
     
-    data$col<-rowSums(data[,colnm])
+    data$non_stem<-rowSums(data[,colnm])
     
     data <- data %>%
-      select(new_col, col)
+      select(stem, non_stem)
     
     newdf <-  as.data.frame(t(data))
     
@@ -144,7 +145,7 @@ shinyServer(function(input, output) {
     #make a bar graph
     graph <-ggplot(dfnew, aes(x = Year, y = V1, fill = major)) +
       geom_bar(stat = "identity") +
-      ylab("number of people") + 
+      ylab("Percentage of Degrees") + 
       theme_bw()
     
     graph 
