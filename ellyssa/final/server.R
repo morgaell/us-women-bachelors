@@ -8,10 +8,12 @@ data <- as.data.frame(data)
 
 shinyServer(function(input, output) {
   
-  ## Bar plot for individual majors, given a year  
+  ## Bar plot for a given individual major 
   output$major_plot <- renderPlot ({
+    # select data from the user input (major)
     selected_major <- data[[input$majors]]
     
+    # create bar plot where x = years, y = percentage of degrees
     plot1 <- ggplot(data)+
       geom_bar(stat = "identity", fill = '#b9c6fa', aes(x = Year , y = selected_major)) +
       ylab("Percentage of Degrees") +
@@ -21,15 +23,27 @@ shinyServer(function(input, output) {
     
   })
   
+  ## Bar plot for all majors for a given year
   output$all_majors_plot <- renderPlot ({
+    # create new dataframe, select all majors columns
     df <- data.frame(data, row.names = data$Year)
     df <- select(df, -Year)
+    
+    # flip rows and columns of dataframe
     df <- data.frame(t(df))
+    
+    # add a column for the degree names
     df <- mutate(df, degrees = row.names(df))
+    # take in user input for year
     user_in <- paste0("X", input$date)
+    
+    # select all major data for the input year
     get_year <- df[[user_in]]
+    
+    # select all degree names 
     get_major <- df$degrees
     
+    # create bar plot where x = all majors, y = percentage of degrees
     plot2 <- ggplot(df) +
         geom_bar(stat = "identity", fill = '#6685ff', aes(x = degrees , y = get_year))+
         theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
@@ -46,7 +60,9 @@ shinyServer(function(input, output) {
       filter(Year == input$Year1)
     
     colnms=c("Biology", "Computer.Science", "Engineering", "Math.and.Statistics", "Physical.Sciences")
+    
     data$stem<-rowSums(data[,colnms])
+    
     colnm=c("Agriculture", "Architecture", "Art.and.Performance", "Business",
             "Communications.and.Journalism", "Education", "English", "Foreign.Languages",
             "Health.Professions", "Psychology", "Public.Administration", "Social.Sciences.and.History")
