@@ -104,19 +104,23 @@ shinyServer(function(input, output) {
   output$graph <- renderPlot({
     
     #read input$Year as a character
-    year1 <- as.character(input$Year1)
-    year2 <- as.character(input$Year2)
+    year3 <- as.character(input$Year3)
+    year4 <- as.character(input$Year4)
+    
+    #year1 <- as.character(1970)
+    #year2 <- as.character(2011)
     
     #create a vector of year input1
-    c1 <- rep(year1, 5)
-    c2 <- rep(year2, 5)
+    c1 <- rep(year3, 5)
+    c2 <- rep(year4, 5)
     
     #filter the data by year input and stem major
     df1 <- data %>% 
-      filter(Year == input$Year1) %>% 
+      filter(Year == input$Year3) %>% 
+      #filter(Year == 1970) %>%
       select(Biology, Computer.Science, Engineering, Math.and.Statistics, Physical.Sciences) 
     
-    #filp the filtered data 
+    #flip the filtered data 
     df1.t <- t(df1) %>% 
       as.data.frame()  
     df1.t <- data.frame(major = rownames(df1.t), number = df1.t, row.names = NULL) %>% 
@@ -124,7 +128,8 @@ shinyServer(function(input, output) {
     
     #filter the data by second year 
     df2 <- data %>% 
-      filter(Year == input$Year2) %>%
+      filter(Year == input$Year4) %>%
+      #filter(Year == 2011) %>%
       select(Biology, Computer.Science, Engineering, Math.and.Statistics, Physical.Sciences) 
     
     #flip the filtered data 
@@ -142,7 +147,7 @@ shinyServer(function(input, output) {
       ylab("number of people") + 
       theme_bw()
     
-    return(graph)
+    graph 
   
 })
   

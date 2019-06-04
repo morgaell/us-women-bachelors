@@ -60,12 +60,12 @@ shinyUI(fluidPage(
     tabPanel("STEM",
              sidebarLayout(
                sidebarPanel(
-                 selectInput("Year1",
+                 selectInput("Year3",
                              "Choose a year",
                              choices = selected_year,
                              selected = "1970"
                  ),
-                 selectInput("Year2",
+                 selectInput("Year4",
                              "Choose a different year",
                              choices = selected_year,
                              selected = "1971"
