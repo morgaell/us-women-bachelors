@@ -56,6 +56,22 @@ shinyUI(fluidPage(
           plotOutput("pie2")
         )
       )       
-    )
+    ),
+    tabPanel("STEM",
+             sidebarLayout(
+               sidebarPanel(
+                 selectInput("Year1",
+                             "Choose a year",
+                             choices = selected_year,
+                             selected = "1970"
+                 ),
+                 selectInput("Year2",
+                             "Choose a different year",
+                             choices = selected_year,
+                             selected = "1971"
+                 )
+               ),
+               mainPanel(plotOutput("graph")
+               )
   )
-))
+))))
