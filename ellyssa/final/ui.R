@@ -1,9 +1,11 @@
 library(shiny)
+library(dplyr)
 
 majors <- data %>% 
   select(-Year)
 
 major_names <- colnames(majors)
+selected_year <- unique(data$Year)
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
@@ -34,6 +36,26 @@ shinyUI(fluidPage(
           plotOutput("all_majors_plot")
         )
        )
+    ),
+    tabPanel("Compare",
+      sidebarLayout(
+        sidebarPanel(
+          selectInput("Year1",
+                      "Choose a year",
+                      choices = selected_year,
+                      selected = "1970"
+          ),
+          selectInput("Year2",
+                      "Choose a different year",
+                      choices = selected_year,
+                      selected = "1971"
+          )
+        ),
+        mainPanel(
+          plotOutput("pie1"),
+          plotOutput("pie2")
+        )
+      )       
     )
   )
 ))
