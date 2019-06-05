@@ -14,7 +14,7 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
   navbarPage("US Women's Bachelors Degrees",
     tabPanel("Introduction",
        mainPanel(
-         img(src='grads.png', align = "middle"), 
+         img(src='grad.jpg', align = "right"), 
          textOutput("intro")
        )
     ),
@@ -26,7 +26,9 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
                       choices = major_names)
         ),
         mainPanel(
-          plotOutput("major_plot")
+          plotOutput("major_plot"),
+          textOutput("by_degree_analysis")
+          
         )
       )
     ),
@@ -40,7 +42,8 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
                          max = 2011)
         ),
         mainPanel(
-          plotOutput("all_majors_plot")
+          plotOutput("all_majors_plot"),
+          textOutput("all_degrees_analysis")
         )
        )
     ),
@@ -56,7 +59,8 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
                       "Choose a different year",
                       choices = selected_year,
                       selected = "1971"
-          )
+          ),
+          textOutput("compare_analysis")
         ),
         mainPanel(
           plotOutput("pie1"),
@@ -78,7 +82,9 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
                              selected = "1971"
                  )
                ),
-               mainPanel(plotOutput("graph")
+               mainPanel(
+                 plotOutput("graph"),
+                 textOutput("stem_analysis")
                )
   )
 ))))
