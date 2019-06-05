@@ -1,0 +1,13 @@
+name: Womens-Bachelor-Degree
+title: Womens-Bachelor-Degree
+username:
+account: morgaell
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 966224
+bundleId: 2131457
+url: https://morgaell.shinyapps.io/Womens-Bachelor-Degree/
+when: 1559711349.51239
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: www/grads.png

@@ -32,12 +32,18 @@ shinyServer(function(input, output) {
     
     # create bar plot where x = years, y = percentage of degrees
     plot1 <- ggplot(data)+
-      geom_bar(stat = "identity", fill = '#b9c6fa', aes(x = Year , y = selected_major)) +
+      geom_bar(stat = "identity", fill = '#ff6666', aes(x = Year , y = selected_major)) +
       ylab("Percentage of Degrees") +
       ggtitle("Degrees by Academic Specialty")
     
     return(plot1)
+  })
+  
+  output$by_degree_analysis <- renderText ({
+    para <- "On this page, you can select a major. The graph above 
+             will show the general trend for the selected major from 1970 to 2011."
     
+    return(para)
   })
   
   ## Bar plot for all majors for a given year
@@ -71,6 +77,11 @@ shinyServer(function(input, output) {
     return(plot2)
   })
   
+  output$all_degrees_analysis <- renderText ({
+    para <- "To compare all majors at once, you can choose a year (from 1970 
+             to 2011). The graph will show the percentage of women who received 
+             bachelors degrees for each major."
+  })
   
   output$pie1 <- renderPlot({
     data <- data %>%
@@ -135,6 +146,15 @@ shinyServer(function(input, output) {
     
   })
   
+  output$compare_analysis <- renderText ({
+    para <- "For anyone who wants to compare the general trends of STEM and 
+             non-STEM majors, this is a good page to explore. On this page, you 
+             can select 2 different years to compare. The pie charts show 
+             the percentage of STEM and non-STEM majors for those years."
+    
+    return(para)
+  })
+  
   output$graph <- renderPlot({
     
     #read input$Year as a character
@@ -184,5 +204,25 @@ shinyServer(function(input, output) {
     graph 
   
 })
+  
+  output$stem_analysis <- renderText ({
+    para <- "On this page, users can pick two different years and compare the popularity
+             of specific STEM majors (Biology, Computer Science, Engineering, Math and Statistics, 
+             and Physical Science).
+            
+             In general, it is not hard to tell that women who chose non STEM majors were more than 
+             who chose STEM major. But the popularity is still increasing."
+    return(para)
+  })
+  
+  output$source_data <- renderUI ({
+    url1 <- a("Bachelor Degree Women USA Dataset", href="https://www.kaggle.com/sureshsrinivas/bachelorsdegreewomenusa")
+    return(url1)
+  })
+  
+  output$source_image <- renderUI ({
+    url2 <- a("Graduation Photo", href="https://thedailysoiree.files.wordpress.com/2015/05/img_1561.jpg")
+    return(url2)
+  })
   
 })

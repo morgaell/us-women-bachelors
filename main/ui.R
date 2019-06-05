@@ -12,13 +12,16 @@ selected_year <- unique(data$Year)
 shinyUI(fluidPage(theme = shinytheme("darkly"),
   
   navbarPage("US Women's Bachelors Degrees",
+    
     tabPanel("Introduction",
-       mainPanel(
-         img(src='grads.png', align = "middle"), 
+      titlePanel("Introduction"), 
+      mainPanel(
+         img(src='grad.jpg', align = "right"), 
          textOutput("intro")
        )
     ),
     tabPanel("Data By Degree",
+     titlePanel("Data by Degree"),
       sidebarLayout(
         sidebarPanel(
           selectInput("majors", 
@@ -26,11 +29,14 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
                       choices = major_names)
         ),
         mainPanel(
-          plotOutput("major_plot")
+          plotOutput("major_plot"),
+          textOutput("by_degree_analysis")
+          
         )
       )
     ),
     tabPanel("All Degree Data",
+      titlePanel("All Degree Data"),
       sidebarLayout(
         sidebarPanel( 
           numericInput("date",
@@ -40,11 +46,13 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
                          max = 2011)
         ),
         mainPanel(
-          plotOutput("all_majors_plot")
+          plotOutput("all_majors_plot"),
+          textOutput("all_degrees_analysis")
         )
        )
     ),
     tabPanel("Compare",
+      titlePanel("Compare STEM and Non-STEM Majors"),
       sidebarLayout(
         sidebarPanel(
           selectInput("Year1",
@@ -56,7 +64,8 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
                       "Choose a different year",
                       choices = selected_year,
                       selected = "1971"
-          )
+          ),
+          textOutput("compare_analysis")
         ),
         mainPanel(
           plotOutput("pie1"),
@@ -65,6 +74,7 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
       )       
     ),
     tabPanel("STEM",
+        titlePanel("STEM Majors"),
              sidebarLayout(
                sidebarPanel(
                  selectInput("Year3",
@@ -78,7 +88,18 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
                              selected = "1971"
                  )
                ),
-               mainPanel(plotOutput("graph")
+               mainPanel(
+                 plotOutput("graph"),
+                 textOutput("stem_analysis")
                )
-  )
-))))
+            )
+          ),
+    tabPanel("Sources",
+       titlePanel("Sources"),
+          mainPanel(
+            uiOutput("source_data"),
+            uiOutput("source_image")
+          )
+             )
+)
+))
