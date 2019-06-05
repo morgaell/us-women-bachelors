@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # us-women-bachelors
 ## Group Members
 
@@ -16,6 +17,8 @@ People can look at the trend for each major in recent years and compare the popu
 ## Link
 Here is our link:
 =======
+=======
+>>>>>>> 28093eb9051711a1a3a93e4f11357b88820faaba
 # Info201-final-project
 
 
@@ -42,4 +45,7 @@ Our interactive web app was created using US women’s bachelor degree data. Thi
 
 ## Authors
 Hiina Domae, Ellyssa Morgan, Fangge Xiong
+<<<<<<< HEAD
 >>>>>>> 214362b53d26c746747e27c1bf88ccdc755fd785
+=======
+>>>>>>> 28093eb9051711a1a3a93e4f11357b88820faaba
