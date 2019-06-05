@@ -208,8 +208,21 @@ shinyServer(function(input, output) {
   output$stem_analysis <- renderText ({
     para <- "On this page, users can pick two different years and compare the popularity
              of specific STEM majors (Biology, Computer Science, Engineering, Math and Statistics, 
-             and Physical Science)"
+             and Physical Science).
+            
+             In general, it is not hard to tell that women who chose non STEM majors were more than 
+             who chose STEM major. But the popularity is still increasing."
     return(para)
+  })
+  
+  output$source_data <- renderUI ({
+    url1 <- a("Bachelor Degree Women USA Dataset", href="https://www.kaggle.com/sureshsrinivas/bachelorsdegreewomenusa")
+    return(url1)
+  })
+  
+  output$source_image <- renderUI ({
+    url2 <- a("Graduation Photo", href="https://thedailysoiree.files.wordpress.com/2015/05/img_1561.jpg")
+    return(url2)
   })
   
 })

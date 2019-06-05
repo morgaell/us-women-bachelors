@@ -12,13 +12,16 @@ selected_year <- unique(data$Year)
 shinyUI(fluidPage(theme = shinytheme("darkly"),
   
   navbarPage("US Women's Bachelors Degrees",
+    
     tabPanel("Introduction",
-       mainPanel(
+      titlePanel("Introduction"), 
+      mainPanel(
          img(src='grad.jpg', align = "right"), 
          textOutput("intro")
        )
     ),
     tabPanel("Data By Degree",
+     titlePanel("Data by Degree"),
       sidebarLayout(
         sidebarPanel(
           selectInput("majors", 
@@ -33,6 +36,7 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
       )
     ),
     tabPanel("All Degree Data",
+      titlePanel("All Degree Data"),
       sidebarLayout(
         sidebarPanel( 
           numericInput("date",
@@ -48,6 +52,7 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
        )
     ),
     tabPanel("Compare",
+      titlePanel("Compare STEM and Non-STEM Majors"),
       sidebarLayout(
         sidebarPanel(
           selectInput("Year1",
@@ -69,6 +74,7 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
       )       
     ),
     tabPanel("STEM",
+        titlePanel("STEM Majors"),
              sidebarLayout(
                sidebarPanel(
                  selectInput("Year3",
@@ -86,5 +92,14 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
                  plotOutput("graph"),
                  textOutput("stem_analysis")
                )
-  )
-))))
+            )
+          ),
+    tabPanel("Sources",
+       titlePanel("Sources"),
+          mainPanel(
+            uiOutput("source_data"),
+            uiOutput("source_image")
+          )
+             )
+)
+))
