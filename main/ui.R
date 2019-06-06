@@ -72,8 +72,10 @@ shinyUI(fluidPage(theme = shinytheme("spacelab"),
         ),
         mainPanel(
           # create two pie charts to compare year 1 and year 2
-          plotOutput("pie1"),
-          plotOutput("pie2")
+          fluidRow(
+            column(6,plotOutput(outputId="pie1", width="300px",height="300px")),  
+            column(6,plotOutput(outputId="pie2", width="300px",height="300px"))
+          )
         )
       )       
     ),
