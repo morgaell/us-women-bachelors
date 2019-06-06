@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 # us-women-bachelors
 ## Group Members
 
@@ -14,17 +13,10 @@ In this project, we want to explore the data of US women who got _bachelors degr
 
 People can look at the trend for each major in recent years and compare the popularity of each major in specific year. In order to figure out the trend of women who got bachelors' degree in STEM major, we divided the 17 majors into 2 parts. One is STEM major, another one is non-STEM major. In our fourth and fifth page, people can compare 2 different years to see the popularity of STEM major (specific) and popularity of STEM and non-STEM major in general trend.
 
-## Link
-Here is our link:
-=======
-=======
->>>>>>> 28093eb9051711a1a3a93e4f11357b88820faaba
-# Info201-final-project
-
 
 ## project link
 
-[hosted webpage](https://morgaell.shinyapps.io/Womens-Bachelor-Degree/)
+[hosted webpage](https://fangge.shinyapps.io/main/)
 
 
 ## Overview
@@ -45,7 +37,3 @@ Our interactive web app was created using US women’s bachelor degree data. Thi
 
 ## Authors
 Hiina Domae, Ellyssa Morgan, Fangge Xiong
-<<<<<<< HEAD
->>>>>>> 214362b53d26c746747e27c1bf88ccdc755fd785
-=======
->>>>>>> 28093eb9051711a1a3a93e4f11357b88820faaba
