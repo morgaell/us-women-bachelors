@@ -161,9 +161,7 @@ shinyServer(function(input, output) {
     year3 <- as.character(input$Year3)
     year4 <- as.character(input$Year4)
     
-    #year1 <- as.character(1970)
-    #year2 <- as.character(2011)
-    
+  
     #create a vector of year input1
     c1 <- rep(year3, 5)
     c2 <- rep(year4, 5)
@@ -171,7 +169,6 @@ shinyServer(function(input, output) {
     #filter the data by year input and stem major
     df1 <- data %>% 
       filter(Year == input$Year3) %>% 
-      #filter(Year == 1970) %>%
       select(Biology, Computer.Science, Engineering, Math.and.Statistics, Physical.Sciences) 
     
     #flip the filtered data 
@@ -183,7 +180,6 @@ shinyServer(function(input, output) {
     #filter the data by second year 
     df2 <- data %>% 
       filter(Year == input$Year4) %>%
-      #filter(Year == 2011) %>%
       select(Biology, Computer.Science, Engineering, Math.and.Statistics, Physical.Sciences) 
     
     #flip the filtered data 
@@ -195,13 +191,15 @@ shinyServer(function(input, output) {
     #combine two datas
     dfnew <- bind_rows(df1.t, df2.t)
     
-    #make a bar graph
-    graph <-ggplot(dfnew, aes(x = Year, y = V1, fill = major)) +
-      geom_bar(stat = "identity") +
-      ylab("Percentage of Degrees") + 
-      theme_bw()
     
-    graph 
+    #make a bar graph
+    graph <- ggplot(dfnew, aes(x = major, y = V1)) +
+      geom_bar(stat = "identity", aes(fill = major)) + facet_grid(. ~ Year) +
+      ylab("percentage of people in Degrees") + 
+      theme_bw() +
+      theme(axis.text.x = element_blank())
+    
+    graph  
   
 })
   
