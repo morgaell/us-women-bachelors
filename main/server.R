@@ -83,7 +83,10 @@ shinyServer(function(input, output) {
              bachelors degrees for each major."
   })
   
+  #create the first comparing pie charts by dividing all majors into STEM and non-STEM major.
   output$pie1 <- renderPlot({
+    
+    #filter the dataset
     data <- data %>%
       filter(Year == input$Year1)
     
@@ -98,10 +101,12 @@ shinyServer(function(input, output) {
     data <- data %>%
       select(stem, non_stem)
     
+    #transpose the dataframe
     newdf <-  as.data.frame(t(data))
     newdf <- data.frame(major = rownames(newdf), number = newdf, row.names = NULL)
     sum <- newdf[1,2] + newdf[2,2]
-  
+    
+    #draw pie chart
     p <- ggplot(newdf, aes(x="", y=V1, fill=major))+
       geom_bar(width = 1, stat = "identity") +
       coord_polar("y") + 
@@ -112,8 +117,10 @@ shinyServer(function(input, output) {
     
   })
   
+  #create the second comparing pie charts by dividing all majors into STEM and non-STEM major.
   output$pie2 <- renderPlot({
     
+    #filter the dataset
     data <- data %>%
       filter(Year == input$Year2)
     
@@ -130,12 +137,12 @@ shinyServer(function(input, output) {
     data <- data %>%
       select(stem, non_stem)
     
+    #transpose the dataframe
     newdf <-  as.data.frame(t(data))
-    
     newdf <- data.frame(major = rownames(newdf), number = newdf, row.names = NULL)
-    
     sum <- newdf[1,2] + newdf[2,2]
     
+    #draw pie chart
     p2 <- ggplot(newdf, aes(x="", y=V1, fill=major))+
       geom_bar(width = 1, stat = "identity") +
       coord_polar("y") + 
