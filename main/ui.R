@@ -8,11 +8,9 @@ majors <- data %>%
 major_names <- colnames(majors)
 selected_year <- unique(data$Year)
 
-# Define UI for application that draws a histogram
-shinyUI(fluidPage(theme = shinytheme("darkly"),
+shinyUI(fluidPage(theme = shinytheme("spacelab"),
   
   navbarPage("US Women's Bachelors Degrees",
-    
     tabPanel("Introduction",
       titlePanel("Introduction"), 
       mainPanel(
@@ -26,30 +24,21 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
         sidebarPanel(
           selectInput("majors", 
                       label = "Select a Major",
-                      choices = major_names)
+                      choices = major_names),
+          sliderInput("date",
+                       "Select a Year",
+                       min = 1970,
+                       max = 2011,
+                       value = 2011,
+                       sep = "")
         ),
         mainPanel(
           plotOutput("major_plot"),
-          textOutput("by_degree_analysis")
-          
-        )
-      )
-    ),
-    tabPanel("All Degree Data",
-      titlePanel("All Degree Data"),
-      sidebarLayout(
-        sidebarPanel( 
-          numericInput("date",
-                         "Select a Year",
-                         value = 2011,
-                         min = 1970,
-                         max = 2011)
-        ),
-        mainPanel(
+          textOutput("by_degree_analysis"),
           plotOutput("all_majors_plot"),
           textOutput("all_degrees_analysis")
         )
-       )
+      )
     ),
     tabPanel("Compare",
       titlePanel("Compare STEM and Non-STEM Majors"),
