@@ -3,11 +3,13 @@ library(dplyr)
 library(ggplot2)
 library(scales)
 
+# read in dataset as dataframe
 data <- read.csv("data/percent-bachelors-degrees-women-usa.csv") 
 data <- as.data.frame(data)
 
 shinyServer(function(input, output) {
   
+  # return introduction paragraph
   output$intro <- renderText ({
     introduction <- "The data shown in this application was released by
       the Department of Education Statistic and accessed by our team via kaggle.com, 
@@ -39,6 +41,7 @@ shinyServer(function(input, output) {
     return(plot1)
   })
   
+  # return analysis paragraph
   output$by_degree_analysis <- renderText ({
     para <- "On this page, you can select a major. The graph above 
              will show the general trend for the selected major from 1970 to 2011."
@@ -77,6 +80,7 @@ shinyServer(function(input, output) {
     return(plot2)
   })
   
+  # return analysis paragraph 
   output$all_degrees_analysis <- renderText ({
     para <- "To compare all majors at once, you can choose a year (from 1970 
              to 2011). The graph will show the percentage of women who received 
@@ -125,15 +129,11 @@ shinyServer(function(input, output) {
       filter(Year == input$Year2)
     
     colnms=c("Biology", "Computer.Science", "Engineering", "Math.and.Statistics", "Physical.Sciences")
-    
     data$stem<-rowSums(data[,colnms])
-    
     colnm=c("Agriculture", "Architecture", "Art.and.Performance", "Business",
             "Communications.and.Journalism", "Education", "English", "Foreign.Languages",
             "Health.Professions", "Psychology", "Public.Administration", "Social.Sciences.and.History")
-    
     data$non_stem<-rowSums(data[,colnm])
-    
     data <- data %>%
       select(stem, non_stem)
     
@@ -153,6 +153,7 @@ shinyServer(function(input, output) {
     
   })
   
+  # return analysis paragraph
   output$compare_analysis <- renderText ({
     para <- "For anyone who wants to compare the general trends of STEM and 
              non-STEM majors, this is a good page to explore. On this page, you 
@@ -167,7 +168,6 @@ shinyServer(function(input, output) {
     #read input$Year as a character
     year3 <- as.character(input$Year3)
     year4 <- as.character(input$Year4)
-    
   
     #create a vector of year input1
     c1 <- rep(year3, 5)
@@ -209,7 +209,7 @@ shinyServer(function(input, output) {
     graph  
   
 })
-  
+  # return introduction paragraph
   output$stem_analysis <- renderText ({
     para <- "On this page, users can pick two different years and compare the popularity
              of specific STEM majors (Biology, Computer Science, Engineering, Math and Statistics, 
@@ -220,11 +220,13 @@ shinyServer(function(input, output) {
     return(para)
   })
   
+  # return hyperlink for dataset
   output$source_data <- renderUI ({
     url1 <- a("Bachelor Degree Women USA Dataset", href="https://www.kaggle.com/sureshsrinivas/bachelorsdegreewomenusa")
     return(url1)
   })
   
+  # return hyperlink for image on introduction page
   output$source_image <- renderUI ({
     url2 <- a("Graduation Photo", href="https://thedailysoiree.files.wordpress.com/2015/05/img_1561.jpg")
     return(url2)
