@@ -5,8 +5,8 @@ account: fangge
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 968289
-bundleId: 2134656
+bundleId: 2134686
 url: https://fangge.shinyapps.io/main/
-when: 1559793003.67778
+when: 1559794506.70128
 asMultiple: FALSE
 asStatic: FALSE
