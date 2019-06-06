@@ -83,7 +83,10 @@ shinyServer(function(input, output) {
              bachelors degrees for each major."
   })
   
+  #create the first comparing pie charts by dividing all majors into STEM and non-STEM major.
   output$pie1 <- renderPlot({
+    
+    #filter the dataset
     data <- data %>%
       filter(Year == input$Year1)
     
@@ -98,10 +101,12 @@ shinyServer(function(input, output) {
     data <- data %>%
       select(stem, non_stem)
     
+    #transpose the dataframe
     newdf <-  as.data.frame(t(data))
     newdf <- data.frame(major = rownames(newdf), number = newdf, row.names = NULL)
     sum <- newdf[1,2] + newdf[2,2]
-  
+    
+    #draw pie chart
     p <- ggplot(newdf, aes(x="", y=V1, fill=major))+
       geom_bar(width = 1, stat = "identity") +
       coord_polar("y") + 
@@ -112,8 +117,10 @@ shinyServer(function(input, output) {
     
   })
   
+  #create the second comparing pie charts by dividing all majors into STEM and non-STEM major.
   output$pie2 <- renderPlot({
     
+    #filter the dataset
     data <- data %>%
       filter(Year == input$Year2)
     
@@ -130,12 +137,12 @@ shinyServer(function(input, output) {
     data <- data %>%
       select(stem, non_stem)
     
+    #transpose the dataframe
     newdf <-  as.data.frame(t(data))
-    
     newdf <- data.frame(major = rownames(newdf), number = newdf, row.names = NULL)
-    
     sum <- newdf[1,2] + newdf[2,2]
     
+    #draw pie chart
     p2 <- ggplot(newdf, aes(x="", y=V1, fill=major))+
       geom_bar(width = 1, stat = "identity") +
       coord_polar("y") + 
@@ -161,9 +168,7 @@ shinyServer(function(input, output) {
     year3 <- as.character(input$Year3)
     year4 <- as.character(input$Year4)
     
-    #year1 <- as.character(1970)
-    #year2 <- as.character(2011)
-    
+  
     #create a vector of year input1
     c1 <- rep(year3, 5)
     c2 <- rep(year4, 5)
@@ -171,7 +176,6 @@ shinyServer(function(input, output) {
     #filter the data by year input and stem major
     df1 <- data %>% 
       filter(Year == input$Year3) %>% 
-      #filter(Year == 1970) %>%
       select(Biology, Computer.Science, Engineering, Math.and.Statistics, Physical.Sciences) 
     
     #flip the filtered data 
@@ -183,7 +187,6 @@ shinyServer(function(input, output) {
     #filter the data by second year 
     df2 <- data %>% 
       filter(Year == input$Year4) %>%
-      #filter(Year == 2011) %>%
       select(Biology, Computer.Science, Engineering, Math.and.Statistics, Physical.Sciences) 
     
     #flip the filtered data 
@@ -195,13 +198,15 @@ shinyServer(function(input, output) {
     #combine two datas
     dfnew <- bind_rows(df1.t, df2.t)
     
-    #make a bar graph
-    graph <-ggplot(dfnew, aes(x = Year, y = V1, fill = major)) +
-      geom_bar(stat = "identity") +
-      ylab("Percentage of Degrees") + 
-      theme_bw()
     
-    graph 
+    #make a bar graph
+    graph <- ggplot(dfnew, aes(x = major, y = V1)) +
+      geom_bar(stat = "identity", aes(fill = major)) + facet_grid(. ~ Year) +
+      ylab("percentage of people in Degrees") + 
+      theme_bw() +
+      theme(axis.text.x = element_blank())
+    
+    graph  
   
 })
   
